@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crave Click Enjoy! — Order & Eat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Crave Click Enjoy! — Order & Eat your favorite food" />
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container">
+      <a class="logo" href="#">Crave Click Enjoy!</a>
+      <div class="nav-actions">
+        <button id="cartButton" class="cart-floating">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-content">
+      <h1 id="heroTitle" class="hero-title">Crave Click Enjoy!</h1>
+      <p id="heroSubtitle" class="hero-subtitle">Order & Eat</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn btn-primary">Explore Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH SECTION -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-container">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search your food">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS SECTION -->
+  <section class="section products" id="products">
+    <div class="container">
+      <h2 class="section-title">Discover Food</h2>
+      
+      <!-- Category Filter -->
+      <div class="category-filters">
+        <button class="category-filter active" data-category="all">All</button>
+        <button class="category-filter" data-category="donuts">Donuts</button>
+        <button class="category-filter" data-category="coffee">Coffee</button>
+        <button class="category-filter" data-category="pastries">Pastries</button>
+        <button class="category-filter" data-category="bread">Bread</button>
+      </div>
+      
+      <div id="productsGrid" class="products-grid">
+        <div class="loading-spinner active">
+          <div class="spinner"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <section class="section gallery" id="gallery">
+    <div class="container">
+      <h2 class="section-title">Our Gallery</h2>
+      <div id="galleryGrid" class="gallery-grid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-container">
+        <div class="contact-form fade-in">
+          <form id="contactForm">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input id="cf_name" type="text" required>
+            </div>
+            <div class="form-group">
+              <label>Your Email</label>
+              <input id="cf_email" type="email" required>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea id="cf_message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+        <div class="contact-info fade-in" id="contactInfo">
+          <!-- Contact info loaded dynamically -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CART MODAL -->
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-content">
+      <div class="cart-header">
+        <h2>My Cart List</h2>
+        <button id="closeCart" class="cart-close">×</button>
+      </div>
+      
+      <div id="cartItems" class="cart-items">
+        <!-- Cart items loaded dynamically -->
+      </div>
+      
+      <div class="promo-section">
+        <p>Do You have any promo code?</p>
+        <div class="promo-input">
+          <input type="text" id="promoCode" placeholder="Enter promo code">
+          <button id="applyPromo" class="btn btn-secondary">Apply</button>
+        </div>
+      </div>
+      
+      <div class="cart-footer">
+        <div class="price-breakdown">
+          <div class="price-row">
+            <span>Subtotal</span>
+            <span>₹<span id="cartSubtotal">0</span></span>
+          </div>
+          <div class="price-row total">
+            <span>Total</span>
+            <span>₹<span id="cartTotal">0</span></span>
+          </div>
+        </div>
+        <button id="checkoutBtn" class="btn btn-primary checkout-btn">
+          Checkout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script type="module">
+    import { supabase } from './supabase.js';
+    import { initPublic } from './script.js';
+    initPublic({ supabase });
+  </script>
+</body>
+</html>
