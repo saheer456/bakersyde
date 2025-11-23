@@ -1,427 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Crave Click Enjoy! - Admin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bakersyde Admin</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
   <style>
-    /* Admin-specific styles */
-    .admin-wrap { 
-      max-width: 1200px; 
-      margin: 0 auto; 
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #faf6f1;
+      color: #3d2b1f;
+    }
+    .container {
+      max-width: 950px;
       padding: 20px;
-      min-height: 100vh;
-      background: var(--cream);
+      margin: auto;
     }
-
-    .admin-header {
-      text-align: center;
-      margin-bottom: 40px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid var(--light-brown);
-    }
-
-    .admin-header h1 {
-      color: var(--accent);
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
       margin-bottom: 10px;
     }
-
-    .admin-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 40px;
-    }
-
-    .admin-full-width {
-      grid-column: 1 / -1;
-    }
-
     .card {
-      background: white;
-      padding: 25px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
+      background: #fff;
+      padding: 22px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
     }
-
-    .card h3 {
-      color: var(--accent);
-      margin-bottom: 20px;
-      font-size: 1.4rem;
-      border-bottom: 2px solid var(--light-brown);
-      padding-bottom: 10px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-label {
-      display: block;
-      margin-bottom: 8px;
+    label {
       font-weight: 600;
-      color: var(--text);
+      margin-bottom: 4px;
+      display: block;
     }
-
-    .form-input, .form-textarea, .form-select {
+    input, textarea, select {
       width: 100%;
-      padding: 12px 15px;
-      border: 2px solid var(--light-brown);
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      transition: var(--transition);
-      background: white;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      font-size: 15px;
+      font-family: inherit;
+      background: #fdfcfb;
     }
-
-    .form-input:focus, .form-textarea:focus, .form-select:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(198, 116, 56, 0.1);
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #fff;
+      background: #3d2b1f;
+      font-weight: 600;
+      font-size: 15px;
     }
-
-    .form-textarea {
-      min-height: 120px;
-      resize: vertical;
+    button:hover {
+      background: #c67a3f;
     }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-
-    .btn-group {
+    .btn-row {
       display: flex;
-      gap: 10px;
-      margin-top: 20px;
+      gap: 12px;
       flex-wrap: wrap;
     }
-
-    .btn-admin {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .btn-admin-primary {
-      background: var(--accent);
-      color: white;
-    }
-
-    .btn-admin-primary:hover {
-      background: var(--accent-dark);
-      transform: translateY(-2px);
-    }
-
-    .btn-admin-secondary {
-      background: var(--light-brown);
-      color: var(--text);
-    }
-
-    .btn-admin-secondary:hover {
-      background: var(--muted);
-      color: white;
-    }
-
-    .btn-admin-danger {
-      background: #ff6b6b;
-      color: white;
-    }
-
-    .btn-admin-danger:hover {
-      background: #ff5252;
-    }
-
     .list-row {
+      background: #fff;
+      padding: 14px;
+      border-radius: 12px;
+      margin-top: 10px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 15px;
-      padding: 15px;
-      border-bottom: 1px solid var(--light-brown);
-      transition: var(--transition);
-    }
-
-    .list-row:hover {
-      background: var(--paper);
-    }
-
-    .list-row:last-child {
-      border-bottom: none;
-    }
-
-    .list-row img {
-      width: 80px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 6px;
-      flex-shrink: 0;
-    }
-
-    .list-row-content {
-      flex: 1;
-    }
-
-    .list-row-title {
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: var(--text);
-    }
-
-    .list-row-meta {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .list-row-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .loading {
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    /* Responsive admin */
-    @media (max-width: 968px) {
-      .admin-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .admin-wrap {
-        padding: 15px;
-      }
-      
-      .card {
-        padding: 20px;
-      }
-      
-      .list-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-      
-      .list-row-actions {
-        width: 100%;
-        justify-content: flex-end;
-      }
+      border: 1px solid #eee;
     }
   </style>
 </head>
+
 <body>
-  <div class="admin-wrap">
-    <!-- Header -->
-    <div class="admin-header">
-      <h1>Crave Click Enjoy! - Admin Panel</h1>
-      <p>Manage your bakery content, products, and gallery</p>
-      <div style="background: #e8f5e8; padding: 10px; border-radius: 8px; margin-top: 15px;">
-        <small>🔓 <strong>No authentication required</strong> - Direct access enabled</small>
-      </div>
-    </div>
 
-    <!-- Main Admin Content -->
-    <div id="adminContent">
-      
-      <!-- Hero & Story Section -->
-      <div class="admin-grid">
-        <div class="card">
-          <h3>Hero Section</h3>
-          <div class="form-group">
-            <label class="form-label">Hero Title</label>
-            <input type="text" id="heroTitle" class="form-input" placeholder="Crave Click Enjoy!">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Hero Subtitle</label>
-            <input type="text" id="heroSubtitle" class="form-input" placeholder="Order & Eat">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Hero Background Image</label>
-            <input type="file" id="heroImageFile" class="form-input" accept="image/*">
-          </div>
-          <button id="uploadHeroImageBtn" class="btn-admin btn-admin-primary">
-            Upload Hero Image
-          </button>
-        </div>
+<div class="container">
 
-        <div class="card">
-          <h3>Our Story Section</h3>
-          <div class="form-group">
-            <label class="form-label">Story Text</label>
-            <textarea id="storyTextArea" class="form-textarea" placeholder="Tell your bakery's story..."></textarea>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Story Image</label>
-            <input type="file" id="storyImageFile" class="form-input" accept="image/*">
-          </div>
-          <button id="uploadStoryImageBtn" class="btn-admin btn-admin-primary">
-            Upload Story Image
-          </button>
-        </div>
-      </div>
+  <h1>Bakersyde Admin Panel</h1>
+  <p style="margin-top:-10px;margin-bottom:22px;">Manage your website content, products, gallery & analytics.</p>
 
-      <!-- Content Actions -->
-      <div class="card admin-full-width">
-        <h3>Content Management</h3>
-        <div class="btn-group">
-          <button id="saveContentBtn" class="btn-admin btn-admin-primary">
-            Save All Content
-          </button>
-          <button id="previewBtn" class="btn-admin btn-admin-secondary">
-            Preview Website
-          </button>
-        </div>
-      </div>
 
-      <!-- Products Management -->
-      <div class="card admin-full-width">
-        <h3>Product Management</h3>
-        
-        <!-- Product Form -->
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Product Name</label>
-            <input type="text" id="p_name" class="form-input" placeholder="Vanilla Donut">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Category</label>
-            <select id="p_category" class="form-select">
-              <option value="">Select Category</option>
-              <option value="donuts">Donuts</option>
-              <option value="coffee">Coffee</option>
-              <option value="pastries">Pastries</option>
-              <option value="bread">Bread</option>
-              <option value="cakes">Cakes</option>
-            </select>
-          </div>
-        </div>
+  <!-- =============== HERO + STORY CONTENT =============== -->
+  <div class="card">
+    <h2>Website Content</h2>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Price (₹)</label>
-            <input type="number" id="p_price" class="form-input" placeholder="199" step="0.01" min="0">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Stock Quantity</label>
-            <input type="number" id="p_stock" class="form-input" placeholder="50" min="0">
-          </div>
-        </div>
+    <h3>Hero Section</h3>
+    <label>Hero Title</label>
+    <input id="heroTitle" type="text">
 
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Preparation Time (minutes)</label>
-            <input type="text" id="p_prep_time" class="form-input" placeholder="15-25">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Product Image</label>
-            <input type="file" id="p_image_file" class="form-input" accept="image/*">
-          </div>
-        </div>
+    <label>Hero Subtitle</label>
+    <input id="heroSubtitle" type="text">
 
-        <div class="form-group">
-          <label class="form-label">Description</label>
-          <textarea id="p_desc" class="form-textarea" placeholder="Describe your product..."></textarea>
-        </div>
+    <label>Hero Image</label>
+    <input id="heroImageFile" type="file">
+    <button id="uploadHeroImageBtn">Upload Hero Image</button>
 
-        <div class="btn-group">
-          <button id="createProductBtn" class="btn-admin btn-admin-primary">
-            Create Product
-          </button>
-          <button id="refreshProductsBtn" class="btn-admin btn-admin-secondary">
-            Refresh Products
-          </button>
-        </div>
+    <hr style="margin:30px 0; border:none; border-bottom:1px solid #eee;">
 
-        <!-- Products List -->
-        <div id="productsList" style="margin-top: 30px;">
-          <h4>Existing Products</h4>
-          <div style="background: var(--paper); padding: 20px; border-radius: 8px; text-align: center; color: var(--muted);">
-            Loading products...
-          </div>
-        </div>
-      </div>
+    <h3>Story Section</h3>
+    <label>Story Text (HTML allowed)</label>
+    <textarea id="storyTextArea" rows="5"></textarea>
 
-      <!-- Gallery Management -->
-      <div class="card admin-full-width">
-        <h3>Gallery Management</h3>
-        
-        <div class="form-group">
-          <label class="form-label">Upload Gallery Images</label>
-          <input type="file" id="galleryFile" class="form-input" accept="image/*" multiple>
-          <small>You can select multiple images</small>
-        </div>
+    <label>Story Image</label>
+    <input id="storyImageFile" type="file">
+    <button id="uploadStoryImageBtn">Upload Story Image</button>
 
-        <div class="btn-group">
-          <button id="uploadGalleryBtn" class="btn-admin btn-admin-primary">
-            Upload Selected Images
-          </button>
-          <button id="refreshGalleryBtn" class="btn-admin btn-admin-secondary">
-            Refresh Gallery
-          </button>
-        </div>
-
-        <!-- Gallery List -->
-        <div id="galleryList" style="margin-top: 30px;">
-          <h4>Gallery Images</h4>
-          <div style="background: var(--paper); padding: 20px; border-radius: 8px; text-align: center; color: var(--muted);">
-            Loading gallery...
-          </div>
-        </div>
-      </div>
-
-      <!-- Analytics -->
-      <div class="card admin-full-width">
-        <h3>Analytics & Messages</h3>
-        
-        <div class="btn-group">
-          <button id="refreshAnalyticsBtn" class="btn-admin btn-admin-primary">
-            Refresh Analytics
-          </button>
-          <button id="exportAnalyticsBtn" class="btn-admin btn-admin-secondary">
-            Export CSV
-          </button>
-        </div>
-
-        <div id="analyticsView" style="margin-top: 20px;">
-          <div style="background: var(--paper); padding: 20px; border-radius: 8px; text-align: center; color: var(--muted);">
-            Analytics data will appear here after clicking "Refresh Analytics"
-          </div>
-        </div>
-      </div>
-
-    </div> <!-- End Admin Content -->
-
-    <!-- Footer Note -->
-    <div style="text-align: center; margin-top: 40px; padding: 20px; color: var(--muted); border-top: 1px solid var(--light-brown);">
-      <small>
-        Crave Click Enjoy! Admin Panel v1.0<br>
-        No authentication required - Direct database access enabled
-      </small>
-    </div>
+    <br><br>
+    <button id="saveContentBtn">Save Website Content</button>
+    <button id="previewBtn" style="background:#6c5ce7;">Preview Website</button>
   </div>
 
-  <script type="module">
-    import { supabase } from './supabase.js';
-    import { initAdmin } from './admin.js';
-    window.addEventListener('DOMContentLoaded', () => {
-  initAdmin({ supabase });
-});
 
-  </script>
+<!-- =============== PRODUCT MANAGER =============== -->
+<div class="card">
+  <h2>Products</h2>
+
+  <label>Product Name</label>
+  <input id="p_name" type="text">
+
+  <label>Price (₹)</label>
+  <input id="p_price" type="number">
+
+  <label>Stock</label>
+  <input id="p_stock" type="number">
+
+  <label>Category</label>
+  <select id="p_category">
+    <option value="">Select Category</option>
+    <option value="Brownies">Brownies</option>
+    <option value="Blondies">Blondies</option>
+    <option value="NYC Cookies">NYC Cookies</option>
+    <option value="Butter Cookies">Butter Cookies</option>
+    <option value="Bombolini">Bombolini</option>
+    <option value="Donuts">Donuts</option>
+    <option value="Cakes">Cakes</option>
+    <option value="Tea Cakes">Tea Cakes</option>
+  </select>
+
+  <label>Description</label>
+  <textarea id="p_desc" rows="3"></textarea>
+
+  <label>Product Image</label>
+  <input id="p_image_file" type="file">
+
+  <div class="btn-row">
+    <button id="createProductBtn">Create Product</button>
+    <button id="refreshProductsBtn" style="background:#6c5ce7;">Refresh List</button>
+  </div>
+
+  <h3 style="margin-top:25px;">Product List</h3>
+  <div id="productsList"></div>
+</div>
+
+
+
+
+  <!-- =============== GALLERY MANAGER =============== -->
+  <div class="card">
+    <h2>Gallery Manager</h2>
+
+    <label>Upload Gallery Images</label>
+    <input id="galleryFile" type="file" multiple>
+
+    <div class="btn-row">
+      <button id="uploadGalleryBtn">Upload to Gallery</button>
+      <button id="refreshGalleryBtn" style="background:#6c5ce7;">Refresh Gallery</button>
+    </div>
+
+    <h3 style="margin-top:25px;">Gallery Items</h3>
+    <div id="galleryList"></div>
+  </div>
+
+
+
+  <!-- =============== ANALYTICS =============== -->
+  <div class="card">
+    <h2>Website Analytics</h2>
+
+    <div class="btn-row">
+      <button id="refreshAnalyticsBtn">Refresh Analytics</button>
+      <button id="exportAnalyticsBtn" style="background:#6c5ce7;">Export CSV</button>
+    </div>
+
+    <div id="analyticsView" style="margin-top:20px;"></div>
+  </div>
+
+</div>
+
+<!-- Load Supabase + Admin Logic -->
+<script type="module">
+  import { supabase } from './supabase.js';
+  import { initAdmin } from './admin.js';
+  initAdmin({ supabase });
+</script>
+
 </body>
 </html>
